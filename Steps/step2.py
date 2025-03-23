@@ -6,8 +6,8 @@ from deep_sort_realtime.deepsort_tracker import DeepSort
 # Load YOLOv8 model
 model = YOLO("yolov8m.pt")
 
-# Initialize DeepSORT tracker
-tracker = DeepSort(max_age=30)
+# Initialize DeepSORT tracker with improved parameters
+tracker = DeepSort(max_age=50, n_init=3, max_iou_distance=0.7)
 
 # Open video capture
 cap = cv2.VideoCapture("../Data/ShoppingCCTVVideo.mp4")
@@ -26,23 +26,17 @@ while cap.isOpened():
         for box in result.boxes:
             if int(box.cls) == 0:  # Class 0 = Person
                 x1, y1, x2, y2 = map(int, box.xyxy[0])
+                w, h = x2 - x1, y2 - y1
                 score = float(box.conf[0])
-                detections.append([x1, y1, x2, y2, score])
+
+                if score > 0.4:  # Ignore detections below 40% confidence
+                    detections.append([[x1, y1, w, h], score])
 
     # Debugging: Check detection format
     print(f"Detections: {detections}")
 
-    if detections:  # Ensure detections are not empty
-        # Convert detections to the format expected by DeepSORT
-        detections_list = []
-        for detection in detections:
-            x1, y1, x2, y2, confidence = detection
-            w = x2 - x1
-            h = y2 - y1
-            detections_list.append([[x1, y1, w, h], confidence])  # Convert to (x, y, w, h)
-
-        # Update DeepSORT tracker
-        tracks = tracker.update_tracks(detections_list, frame=frame)
+    if detections:
+        tracks = tracker.update_tracks(detections, frame=frame)
 
         # Draw bounding boxes and track IDs
         for track in tracks:
