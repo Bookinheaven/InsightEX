@@ -11,6 +11,8 @@ import random
 VIDEO_PATH = "../Data/ShoppingCCTVVideo.mp4"
 OPENVINO_MODEL_DIR = "yolov8m-pose_openvino_model"  # Folder containing the exported OpenVINO model
 ZONES_FILE = "zones.json"
+MODEL_NAME = "yolov8m-pose.pt"
+OPENVINO_MODEL_DIR = "yolov8m-pose_openvino_model"
 
 DETECTION_CONF_THRESHOLD = 0.5
 KEYPOINT_CONF_THRESHOLD = 0.3
@@ -113,7 +115,32 @@ def draw_pose_keypoints_and_skeleton(frame, keypoints):
             if pt1 is not None and pt2 is not None:
                 cv2.line(frame, pt1, pt2, (255, 255, 0), 2)
 
+def check_Model_Exists():
+    # Download PyTorch model if not present.
+    if not os.path.exists(MODEL_NAME):
+        print(f"{MODEL_NAME} not found. Downloading...")
+        model = YOLO(MODEL_NAME)
+        while not os.path.exists(MODEL_NAME):
+            print("Waiting for model download...")
+            time.sleep(2)
+    else:
+        print(f"{MODEL_NAME} already exists.")
+    # Export to OpenVINO if the directory is not present.
+    if not os.path.exists(OPENVINO_MODEL_DIR):
+        print("OpenVINO model not found. Exporting...")
+        model = YOLO(MODEL_NAME, task="pose")
+        model.export(format="openvino")
+        while not os.path.exists(OPENVINO_MODEL_DIR):
+            print("Waiting for OpenVINO export...")
+            time.sleep(2)
+        print("Export completed.")
+    else:
+        print("OpenVINO model already exists.")
+
+
+
 def main():
+    check_Model_Exists()
     global entry_zones
     entry_zones = load_zones()
 
