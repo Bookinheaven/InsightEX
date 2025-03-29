@@ -17,7 +17,8 @@ MODEL_NAME = "yolov8m-pose.pt"
 
 DETECTION_CONF_THRESHOLD = 0.5
 KEYPOINT_CONF_THRESHOLD = 0.3
-ALERT_TIME_SECONDS = 120  # 2 minutes
+ALERT_TIME_SECONDS = 20  # 20 sec
+# ALERT_TIME_SECONDS = 120  # 2 minutes
 
 SKELETON_CONNECTIONS = [
     (0, 1),  # nose -> left eye
@@ -171,8 +172,8 @@ def main():
     frame_w = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
     heatmap = np.zeros((frame_h, frame_w), dtype=np.float32)
 
-    cv2.namedWindow("Video Stream", cv2.WINDOW_NORMAL)
-    cv2.setMouseCallback("Video Stream", draw_entry_zone)
+    cv2.namedWindow("Insight", cv2.WINDOW_NORMAL)
+    cv2.setMouseCallback("Insight", draw_entry_zone)
 
     prev_time = time.time()
 
@@ -291,7 +292,7 @@ def main():
         cv2.putText(overlay, "Left-click: Draw zone | Right-click: Erase zone | 'q' to quit",
                     (20, frame_h - 20), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
 
-        cv2.imshow("Video Stream", overlay)
+        cv2.imshow("Insight", overlay)
         if cv2.waitKey(1) & 0xFF == ord("q"):
             break
 
