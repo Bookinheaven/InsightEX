@@ -1,0 +1,7 @@
+openvino
+openvino-dev
+opencv-python==4.11.0.86
+deep-sort-realtime==1.3.2
+ultralytics==8.3.96
+torch==2.6.0
+numpy==1.26.4
