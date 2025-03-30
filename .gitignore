@@ -4,3 +4,5 @@ yolov8m-pose.pt
 .python-version
 /__pycache__
 /.idea
+kernel.errors.txt
+install-pyenv-win.ps1

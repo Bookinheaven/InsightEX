@@ -10,6 +10,13 @@ echo ------------------ pyenv-win step complete --------------------
 echo.
 
 REM ----------------------------------------------------------------
+REM Step 1b: Refresh environment variables so pyenv is immediately available
+REM Try to call refreshenv (from Chocolatey). If that fails, fallback to a PowerShell command.
+call refreshenv 2>NUL || powershell -NoProfile -ExecutionPolicy Bypass -Command "[System.Environment]::SetEnvironmentVariable('PATH', [System.Environment]::GetEnvironmentVariable('Path','User') + ';' + [System.Environment]::GetEnvironmentVariable('Path','Machine'), [System.EnvironmentVariableTarget]::Process)"
+echo Environment variables refreshed.
+echo.
+
+REM ----------------------------------------------------------------
 REM Step 2: Install Python 3.10.11 using pyenv and set it as the local version
 powershell -NoProfile -ExecutionPolicy Bypass -Command "$pythonVersion = '3.10.11'; if (-not (pyenv versions | Select-String $pythonVersion)) { Write-Host ('Installing Python ' + $pythonVersion + ' using pyenv...') -ForegroundColor Cyan; pyenv install $pythonVersion; Write-Host ('Python ' + $pythonVersion + ' installed successfully.') -ForegroundColor Green; } else { Write-Host ('Python ' + $pythonVersion + ' is already installed.') -ForegroundColor Yellow; } ; Write-Host ('Setting local Python version to ' + $pythonVersion + '...') -ForegroundColor Cyan; pyenv local $pythonVersion; Write-Host 'Local Python version set.' -ForegroundColor Green;"
 echo ---------------- Python Setup Step Complete ----------------------
@@ -27,6 +34,8 @@ powershell -NoProfile -ExecutionPolicy Bypass -Command "& { $venvPath = Join-Pat
 echo =================== Setup Complete! ============================
 echo.
 
+REM ----------------------------------------------------------------
+REM Step 5: Launch the AI Module
 echo =================== Launching AI Module ======================
 echo.
 BaseEnv\Scripts\python.exe -m InsightEX
