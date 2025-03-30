@@ -89,15 +89,20 @@ Before you begin, ensure you have the following installed:
     ```
 2. **Run the Setup Script**  
    For Windows:
+   PowerShell
     ```sh
     ./setup.bat
+    ```
+   Command Prompt
+   ```sh
+    setup.bat
     ```
    For Linux:
     ```sh
     chmod +x setup.sh
     ./setup.sh
     ```
-3. **Start the System**  
+4. **Start the System**  
    The setup script automatically runs the InsightEX system. Alternatively, run:
     ```sh
     python InsightEX.py
