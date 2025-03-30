@@ -3,3 +3,4 @@ yolov8m-pose.pt
 /yolov8m-pose_openvino_model
 .python-version
 /__pycache__
+/.idea
