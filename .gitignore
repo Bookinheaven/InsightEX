@@ -1,11 +1,5 @@
-Steps/yolov8l.pt
-Steps/yolov8m.pt
-Steps/yolov8n.pt
-Steps/yolov8s.pt
-Steps/yolov8x.pt
-/.BaseEnv
-/.OpenVino
 /BaseEnv
-/yolov8m-pose_openvino_model
 yolov8m-pose.pt
+/yolov8m-pose_openvino_model
 .python-version
+/__pycache__
