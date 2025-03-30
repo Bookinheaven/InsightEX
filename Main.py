@@ -261,7 +261,7 @@ def main():
         return
 
     frame_h = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-    frame_w = int(cap.gect(cv2.CAP_PROP_FRAME_WIDTH))
+    frame_w = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
     heatmap = np.zeros((frame_h, frame_w), dtype=np.float32)
 
     cv2.namedWindow("Insight", cv2.WINDOW_NORMAL)
