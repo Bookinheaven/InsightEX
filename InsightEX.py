@@ -3,50 +3,45 @@ import sys
 import subprocess
 
 def is_inside_base_env():
-    """Returns True if the current Python environment is BaseEnv."""
+    """Check if running inside BaseEnv."""
     return os.path.basename(sys.prefix) == "BaseEnv"
 
 def run_setup_script():
-    """If BaseEnv is missing, run the appropriate setup script to create it."""
+    """Run setup only if BaseEnv is missing."""
+    if is_inside_base_env():
+        return
     base_env_path = os.path.join(os.getcwd(), "BaseEnv")
     if not os.path.exists(base_env_path):
-        print("BaseEnv not found.")
-        if os.name == 'nt':  # Windows
-            print("Running setup.bat to create BaseEnv...")
-            subprocess.run("setup.bat", shell=True, check=True)
-        else:  # Linux
-            print("Running setup.sh to create BaseEnv...")
-            subprocess.run("chmod +x setup.sh", shell=True, check=True)
-            subprocess.run("./setup.sh", shell=True, check=True)
+        print("BaseEnv not found. Running setup script...")
+        script = "setup.bat" if os.name == "nt" else "setup.sh"
+        subprocess.run(script, shell=True, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     else:
         print("BaseEnv already exists.")
 
 def activate_base_env():
-    """Activates BaseEnv and restarts the current script in that environment."""
-    base_env_path = os.path.join(os.getcwd(), "BaseEnv")
+    """Activate BaseEnv and restart script inside it."""
     if is_inside_base_env():
-        print("Already running inside BaseEnv.")
         return
+    base_env_path = os.path.join(os.getcwd(), "BaseEnv")
     print(f"Activating BaseEnv from: {base_env_path}")
-    if os.name == 'nt':  # Windows
+    if os.name == "nt":
         activate_script = os.path.join(base_env_path, "Scripts", "activate.bat")
         activate_cmd = f'cmd.exe /c "{activate_script} && python {" ".join(sys.argv)}"'
-    else:  # Linux
+    else:
         activate_script = os.path.join(base_env_path, "bin", "activate")
         activate_cmd = f'bash -c "source {activate_script} && python {" ".join(sys.argv)}"'
-
-    subprocess.run(activate_cmd, shell=True, check=True)
+    subprocess.run(activate_cmd, shell=True, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     sys.exit(0)
 
 def run_insightex():
-    """Run the Main.py script with any passed command-line arguments."""
+    """Run Main.py inside BaseEnv."""
     command = [sys.executable, "Main.py"] + sys.argv[1:]
-    print("Running InsightEX.py with command:", " ".join(command))
+    print("Running InsightEX.py...")
     subprocess.run(command, check=True)
 
 def main():
-    run_setup_script()
     if not is_inside_base_env():
+        run_setup_script()
         activate_base_env()
     run_insightex()
 
