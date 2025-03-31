@@ -146,17 +146,7 @@ def draw_pose_keypoints_and_skeleton(frame, keypoints):
             if pt1 is not None and pt2 is not None:
                 cv2.line(frame, pt1, pt2, (255, 255, 0), 2)
 
-def check_Model_Exists():
-    # Download PyTorch model if not present.
-    if not os.path.exists(MODEL_NAME):
-        print(f"{MODEL_NAME} not found. Downloading...")
-        model = YOLO(MODEL_NAME)
-        while not os.path.exists(MODEL_NAME):
-            print("Waiting for model download...")
-            time.sleep(2)
-    else:
-        print(f"{MODEL_NAME} already exists.")
-    # Export to OpenVINO if the directory is not present.
+def check_model_exists():
     if not os.path.exists(OPENVINO_MODEL_DIR):
         print("OpenVINO model not found. Exporting...")
         model = YOLO(MODEL_NAME, task="pose")
@@ -165,17 +155,20 @@ def check_Model_Exists():
             print("Waiting for OpenVINO export...")
             time.sleep(2)
         print("Export completed.")
+        if os.path.exists(MODEL_NAME):
+            try:
+                os.remove(MODEL_NAME)
+                print(f"{MODEL_NAME} deleted after exporting to OpenVINO.")
+            except Exception as e:
+                print(f"Error deleting {MODEL_NAME}: {e}")
     else:
         print("OpenVINO model already exists.")
 
-# ---------------------
-# ReID Feature Extraction Functions
-# ---------------------
+
 def extract_reid_feature(frame, bbox):
     """
     Extracts a feature vector for the given bounding box from the frame.
     This is a placeholder function using a color histogram.
-    Replace this with your own ReID model for better performance.
     """
     x1, y1, x2, y2 = bbox
     crop = frame[y1:y2, x1:x2]
@@ -240,9 +233,7 @@ def main():
     # Load zones for the current source from the shared zones file.
     global entry_zones
     entry_zones = get_zones_for_source(source_key)
-
-    check_Model_Exists()
-
+    check_model_exists()
     model = YOLO(OPENVINO_MODEL_DIR)
 
     tracker = DeepSort(max_age=200, n_init=3, max_iou_distance=0.7)
