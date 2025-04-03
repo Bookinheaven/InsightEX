@@ -154,20 +154,15 @@ InsightEX can process both video files and live camera feeds. Follow these steps
 - **Advanced Security Alerts:** Detecting and responding to unusual behavior automatically.
 
 <!-- CHALLENGES ADDRESSED -->
+## Challenges Addressed
 
-### Challenges Addressed
 - No Customer Insights – Tracks movement to understand shopping behavior.
 
 - Staff Mismanagement – Ensures employees are in the right place at the right time.
 
-- Security Issues – Detects unusual activity and alerts staff.
-
 - Bad Store Layouts – Helps improve design for better shopping flow.
 
 - Missed Sales – Identifies popular areas to boost promotions.
-
-- No Real-Time Tracking – Provides instant updates and alerts.
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- CONTRIBUTORS -->
 ## Contributors
@@ -175,10 +170,6 @@ InsightEX can process both video files and live camera feeds. Follow these steps
 - [Choppa Sai Akshitha](https://github.com/akshithachoppa)  
 - [Febin Renu](https://github.com/febinrenu)
 <hr>
-<a href="https://github.com/othneildrew/Best-README-Template/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Bookinheaven/InsightEX" alt="contrib.rocks image" />
-</a>
-<p align="right"><a href="#readme-top"><strong>Back to Top</strong></a></p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
 [tanvik]: https://github.com/Bookinheaven
