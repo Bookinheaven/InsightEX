@@ -1,11 +1,8 @@
 @echo off
 setlocal enabledelayedexpansion
 
-:: Check if the script has already restarted
-if "%RESTARTED%"=="1" goto SKIP_RESTART
-
-:: Flag to track restart requirement
-set RESTART_REQUIRED=0
+:: If not defined, initialize RESTARTED
+if not defined RESTARTED set "RESTARTED=0"
 
 :: Display header
 echo.
@@ -15,20 +12,15 @@ echo ==================================================
 echo.
 
 :: STEP 1: CHECK AND INSTALL PYENV
+:: The PowerShell command will exit with code 10 if pyenv-win was installed now.
 powershell -NoProfile -ExecutionPolicy Bypass -Command "if (-not (Get-Command pyenv -ErrorAction SilentlyContinue)) { Write-Host 'Installing pyenv-win...'; Invoke-WebRequest -UseBasicParsing -Uri 'https://raw.githubusercontent.com/pyenv-win/pyenv-win/master/pyenv-win/install-pyenv-win.ps1' -OutFile './install-pyenv-win.ps1'; & './install-pyenv-win.ps1'; exit 10; } else { Write-Host 'pyenv is already installed.'; exit 0 }"
 
-:: Check the exit code from PowerShell (10 means pyenv was installed)
-if %ERRORLEVEL%==10 set RESTART_REQUIRED=1
-
-:: STEP 1B: RESTART IF REQUIRED
-if "%RESTART_REQUIRED%"=="1" (
-    echo Restarting command prompt to apply changes...
-    set RESTARTED=1
-    call "%~f0"
+:: If PowerShell exited with 10 and we haven't restarted yet, open a new cmd and exit.
+if %ERRORLEVEL%==10 if "%RESTARTED%"=="0" (
+    echo pyenv-win was installed. Restarting command prompt to apply changes...
+    start "" cmd /k "set RESTARTED=1 && %~f0"
     exit /b
 )
-
-:SKIP_RESTART
 
 :: STEP 2: INSTALL PYTHON 3.10.11 USING PYENV
 powershell -NoProfile -ExecutionPolicy Bypass -Command "if (-not (pyenv versions | Select-String '3.10.11')) { Write-Host 'Installing Python 3.10.11...'; pyenv install 3.10.11; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }; Write-Host 'Python 3.10.11 installed successfully.'; } else { Write-Host 'Python 3.10.11 is already installed.'; }; Write-Host 'Setting local Python version to 3.10.11...'; pyenv local 3.10.11; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }; Write-Host 'Local Python version set.';"
