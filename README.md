@@ -8,7 +8,7 @@
   <a href="">
     <img src="assets/images/logo.png" alt="INSIGHT Logo" width="200" height="200">
   </a>
-  <h1 align="center">INSIGHT</h1>
+  <h1 align="center">InsightEX</h1>
   <h3 align="center">Enhancing Customer Experience with AI-Driven Insights</h3>
   <p align="center">
     A smart AI system designed to optimize store layouts, enhance security, and elevate customer experience in real time.
