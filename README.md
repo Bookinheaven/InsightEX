@@ -169,6 +169,8 @@ InsightEX can process both video files and live camera feeds. Follow these steps
 - [Tanvik Sri Ram](https://github.com/Bookinheaven)  
 - [Choppa Sai Akshitha](https://github.com/akshithachoppa)  
 - [Febin Renu](https://github.com/febinrenu)
+
+<p align="right"><a href="#readme-top"><strong>Back to Top</strong></a></p>
 <hr>
 
 <!-- MARKDOWN LINKS & IMAGES -->
