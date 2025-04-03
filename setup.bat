@@ -23,7 +23,8 @@ if %ERRORLEVEL%==10 set RESTART_REQUIRED=1
 :: STEP 1B: RESTART IF REQUIRED
 if "%RESTART_REQUIRED%"=="1" (
     echo Restarting command prompt to apply changes...
-    start "" cmd /c "set RESTARTED=1 && "%~f0""
+    set RESTARTED=1
+    call "%~f0"
     exit /b
 )
 
