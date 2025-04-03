@@ -88,15 +88,15 @@ Before you begin, ensure you have the following installed:
     cd InsightEX
     ```
 2. **Run the Setup Script**  
-   For Windows:
-   PowerShell
-    ```sh
-    ./setup.bat
-    ```
-   Command Prompt
-   ```sh
-    setup.bat
-    ```
+   For Windows:  
+   * PowerShell
+      ```sh
+      ./setup.bat
+      ```
+   * Command Prompt
+     ```sh
+      setup.bat
+      ```
    For Linux:
     ```sh
     chmod +x setup.sh
@@ -107,7 +107,23 @@ Before you begin, ensure you have the following installed:
     ```sh
     python InsightEX.py
     ```
-    
+
+### Uninstallation
+1. **Cleanup Script**  
+   For Windows:  
+   * PowerShell
+      ```sh
+      ./clean.bat
+      ```
+   * Command Prompt
+     ```sh
+      clean.bat
+      ```
+   For Linux:
+    ```sh
+    chmod +x clean.sh
+    ./clean.sh
+    ```
 <p align="right"><a href="#readme-top"><strong>Back to Top</strong></a></p>
 
 <!-- USAGE -->
