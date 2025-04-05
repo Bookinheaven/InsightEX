@@ -157,6 +157,11 @@ InsightEX can process both video files and live camera feeds. Follow these steps
 ## Flowchart
 ![Flowchart][flowchart-img]
 
+## Outputs
+![out1][out1-img]
+![out2][out2-img]
+![out3][out3-img]
+
 <!-- FUTURE INSIGHTS -->
 ## Future Insights
 
@@ -199,6 +204,10 @@ InsightEX can process both video files and live camera feeds. Follow these steps
 [stars-url]: https://github.com/Bookinheaven/InsightEX/stargazers
 
 [flowchart-img]: assets/images/flowchart.png
+[out1-img]: assets/images/out1.png
+[out2-img]: assets/images/out2.png
+[out3-img]: assets/images/out3.png
+
 [contributors-img]: contrib.rocks/image?repo=Bookinheaven/InsightEX
 [Python]: https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white
 [Python-url]: https://www.python.org
