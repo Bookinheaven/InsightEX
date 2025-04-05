@@ -34,6 +34,8 @@
     </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#flowchart">Flowchart</a></li>
+    <li><a href="#outputs">Outputs</a></li>
+    <li><a href="#documentation">Documentation</a></li>
     <li><a href="#future-insights">Future Insights</a></li>
     <li><a href="#challenges-addressed">Challenges Addressed</a></li>
     <li><a href="#contributors">Contributors</a></li>
@@ -157,10 +159,15 @@ InsightEX can process both video files and live camera feeds. Follow these steps
 ## Flowchart
 ![Flowchart][flowchart-img]
 
+<!-- OUTPUTS -->
 ## Outputs
 ![out1][out1-img]
 ![out2][out2-img]
 ![out3][out3-img]
+
+<!-- REPORTS -->
+## Documentation
+[View the InsightEX Documentation][Documentation-url]
 
 <!-- FUTURE INSIGHTS -->
 ## Future Insights
@@ -207,7 +214,7 @@ InsightEX can process both video files and live camera feeds. Follow these steps
 [out1-img]: assets/images/out1.png
 [out2-img]: assets/images/out2.png
 [out3-img]: assets/images/out3.png
-
+[Documentation-url]: report/InsightEX%20Documentation.pdf
 [contributors-img]: contrib.rocks/image?repo=Bookinheaven/InsightEX
 [Python]: https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white
 [Python-url]: https://www.python.org
